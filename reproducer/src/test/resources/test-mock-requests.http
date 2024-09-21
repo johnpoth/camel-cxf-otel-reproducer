@@ -1,0 +1,17 @@
+### Service list
+GET http://localhost:8899/services/
+
+### CXF SOAP Say Hi
+POST http://localhost:8899/mock/services/sayHiSoap
+Content-Type: application/xml
+
+<empty/>
+
+### CXF SOAP Pizza
+POST http://localhost:8899/mock/services/pizzaSoap
+Content-Type: application/xml
+
+<empty/>
+
+### CXF REST Say Hi
+GET http://localhost:8899/mock/services/sayHiRest?name=John%20Doe

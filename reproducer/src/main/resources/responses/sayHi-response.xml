@@ -1,0 +1,7 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <ns4:sayHiResponse xmlns:ns4="http://camel.apache.org/cxf/wsrm">
+            <ns4:responseType>Bonjour</ns4:responseType>
+        </ns4:sayHiResponse>
+    </soap:Body>
+</soap:Envelope>

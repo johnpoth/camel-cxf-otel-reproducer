@@ -1,0 +1,5 @@
+###
+POST http://localhost:8899/services/otel-main-service
+Content-Type: application/xml
+
+< ./requests/sample-request.xml

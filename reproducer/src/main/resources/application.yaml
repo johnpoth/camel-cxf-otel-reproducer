@@ -1,0 +1,84 @@
+spring:
+  application:
+    name: otel-reproducer
+  main:
+    banner-mode: off
+  jmx:
+    enabled: true
+
+camel:
+  component:
+    cxf:
+      allow-streaming: false
+
+  debug:
+    enabled: true
+
+  springboot:
+    dump-routes: xml
+    # global-options:
+    #   CamelLogDebugBodyMaxChars: 999999
+    log-mask: true
+    log-debug-max-chars: 999999
+    inflight-repository-browse-enabled: true
+    message-history: true
+    source-location-enabled: true
+    tracing: true
+    tracing-logging-format: "%-4.4s [%-50.50s] [%-50.50s]"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - hawtio
+          - jolokia
+
+say-hi-soap-url: http://localhost:${server.port}/mock/services/sayHiSoap
+say-hi-rest-url: http://localhost:${server.port}/mock/services/sayHiRest
+pizza-soap-url: http://localhost:${server.port}/mock/services/pizzaSoap
+
+server:
+  port: 8899
+
+logging:
+  level:
+    org.apache.cxf.jaxb.JAXBDataBinding: INFO
+    org.apache.wss4j.dom.validate: DEBUG
+    com.ulisesbocchio: WARN
+
+    org.apache.camel.builder.FlexibleAggregationStrategy: DEBUG
+    org.apache.camel.component.cxf.jaxws: TRACE
+    org.apache.camel.component.http: DEBUG
+    org.apache.camel.component.jaxb: DEBUG
+    org.apache.camel.component.jackson: DEBUG
+    org.apache.camel.component.mybatis: DEBUG
+    org.apache.camel.dsl.support.RouteBuilderLoaderSupport: DEBUG
+    org.apache.camel.dsl.xml.io: DEBUG
+    #org.apache.camel.processor.CatchProcessor: TRACE
+    #org.apache.camel.processor.TryProcessor: TRACE
+    org.apache.camel.support.jsse.BaseSSLContextParameters: INFO
+    #org.apache.camel.impl.converter: DEBUG
+    org.apache.camel.language.xpath.XPathBuilder: WARN
+    org.apache.camel.support.builder.xml.XMLConverterHelper: ERROR
+    org.apache.camel.support.jsse: DEBUG
+
+    org.apache.cxf: DEBUG
+    org.apache.cxf.jaxrs.utils.ResourceUtils: INFO
+    org.apache.cxf.ws.security: TRACE
+    org.apache.hc.client5.http: DEBUG
+    org.apache.hc.client5.http2: DEBUG
+    org.apache.ibatis: DEBUG
+    org.mybatis: DEBUG
+
+    #org.springframework: TRACE
+
+    java: DEBUG
+    jdk.internal.httpclient: DEBUG
+    org.glassfish.jaxb.core: DEBUG
+
+    # XML Resolver
+    #org.xmlresolver: DEBUG
+
+    # OTEL
+    io.opentelemetry.javaagent: DEBUG

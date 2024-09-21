@@ -1,0 +1,26 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="OpenTelemetryReproducer (OTEL agent)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <envs>
+      <env name="OTEL_JAVAAGENT_LOGGING" value="simple" />
+      <env name="OTEL_LOGS_EXPORTER" value="none" />
+      <env name="OTEL_METRICS_EXPORTER" value="none" />
+      <env name="OTEL_TRACES_EXPORTER" value="logging-otlp" />
+    </envs>
+    <module name="reproducer" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="my.example.otel.reproducer.OpenTelemetryReproducer" />
+    <option name="VM_PARAMETERS" value="-ea -javaagent:$ProjectFileDir$/etc/opentelemetry-javaagent-2.8.0.jar -Dio.opentelemetry.javaagent.shaded.io.opentelemetry.context.enableStrictContext=true" />
+    <extension name="net.ashald.envfile">
+      <option name="IS_ENABLED" value="false" />
+      <option name="IS_SUBST" value="false" />
+      <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+      <option name="IS_IGNORE_MISSING_FILES" value="false" />
+      <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+      <ENTRIES>
+        <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+      </ENTRIES>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
