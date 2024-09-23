@@ -13,7 +13,6 @@ class ExternalServicesMockingRoutes extends RouteBuilder {
         restConfiguration().inlineRoutes(false);
 
         rest("/mock/services")
-
                 .post("/sayHiSoap").routeId("rest-POST-say-hi").to("direct:mock-POST-say-hi")
                 .post("/pizzaSoap").routeId("rest-POST-pizza").to("direct:mock-POST-pizza")
                 .get("/sayHiRest").routeId("rest-GET-say-hi").param().name("name").type(RestParamType.header).endParam().to("direct:mock-GET-say-hi")
