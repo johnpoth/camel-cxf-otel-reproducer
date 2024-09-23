@@ -1,7 +1,9 @@
 package my.example.otel.reproducer;
 
+import jakarta.ws.rs.core.MediaType;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.cxf.common.message.CxfConstants;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -35,24 +37,31 @@ public class MainRoutes extends RouteBuilder {
                 .split(super.body().tokenizeXML("order", "orders"))//.streaming().parallelProcessing()
                     .setBody(xpath("Parameter[@Name]", String.class))
                     .log(LOG_MESSAGE)
-                    .to("cxfrs:bean:sayHiRest")
+                    .to("direct:say-hi-rest-invoker")
                 .end()
 
-                .to("direct:pizza-soap-invoker");
+                .to("direct:pizza-soap-invoker")
+        ;
 
         from("direct:pizza-soap-invoker")
                 .routeId("pizza-soap-invoker-route")
                 .process(createPizzaPayloadProcessor)
-                .log(LOG_MESSAGE);
+                .log(LOG_MESSAGE)
+                .to("cxf:bean:pizzaSoap");
 
         from("direct:say-hi-soap-invoker")
                 .routeId("say-hi-soap-invoker-route")
                 .process(createSayHiPayloadProcessor)
+                .to("cxf:bean:sayHiSoap")
                 .log(LOG_MESSAGE);
 
         from("direct:say-hi-rest-invoker")
                 .routeId("say-hi-rest-invoker-route")
-                .setBody(e -> "Hello there, %s".formatted(e.getMessage().getHeader("name", String.class)))
+                .removeHeader(CxfConstants.CAMEL_CXF_MESSAGE)
+                .setHeader(CxfConstants.OPERATION_NAME, () -> "sayHi")
+                .setHeader(CxfConstants.HTTP_METHOD, () -> "GET")
+                .setHeader(CxfConstants.CONTENT_TYPE, () -> MediaType.TEXT_PLAIN)
+                .to("cxfrs:bean:sayHiRest")
                 .log(LOG_MESSAGE);
     }
 
