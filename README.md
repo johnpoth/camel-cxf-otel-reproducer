@@ -8,3 +8,8 @@ Please download the OpenTelemetry agent from https://github.com/open-telemetry/o
 
 - Start the `reproducer` project
 - If you're using IntelliJ IDEA, there's a sample request file available at `reproducer/src/test/resources/test-requests.http`.
+
+### Traces without fixes
+
+- CXF async mode: [<img src="images/cxf-async-no-fixes.png">]
+- CXF sync mode: [<img src="images/cxf-sync-no-fixes.png">]
