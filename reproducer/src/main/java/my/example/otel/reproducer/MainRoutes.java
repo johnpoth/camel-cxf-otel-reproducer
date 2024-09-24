@@ -37,7 +37,7 @@ public class MainRoutes extends RouteBuilder {
                 .split(super.body().tokenizeXML("order", "orders")).synchronous(true)//.streaming().parallelProcessing()
                     .setBody(xpath("Parameter[@Name]", String.class))
                     .log(LOG_MESSAGE)
-                    .to("direct:say-hi-rest-invoker")
+                    .to("direct:say-hi-rest-invoker?synchronous=true")
                 .end()
 
                 .to("direct:pizza-soap-invoker")
