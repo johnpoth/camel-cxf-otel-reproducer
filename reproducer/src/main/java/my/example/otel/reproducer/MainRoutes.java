@@ -34,7 +34,7 @@ public class MainRoutes extends RouteBuilder {
                 // to simulate a parallel splitter
                 .setBody(e -> FAKE_XML_BODY)
                 .setHeader(Exchange.HTTP_METHOD, () -> "GET")
-                .split(super.body().tokenizeXML("order", "orders"))//.streaming().parallelProcessing()
+                .split(super.body().tokenizeXML("order", "orders")).synchronous(true)//.streaming().parallelProcessing()
                     .setBody(xpath("Parameter[@Name]", String.class))
                     .log(LOG_MESSAGE)
                     .to("direct:say-hi-rest-invoker")
