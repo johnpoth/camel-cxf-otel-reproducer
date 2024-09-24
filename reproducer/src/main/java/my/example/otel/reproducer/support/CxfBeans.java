@@ -1,7 +1,12 @@
 package my.example.otel.reproducer.support;
 
 import https.www_w3schools_com.xml.TempConvertSoap;
+import io.opentelemetry.api.GlobalOpenTelemetry;
 import io.opentelemetry.api.OpenTelemetry;
+import io.opentelemetry.api.trace.propagation.W3CTraceContextPropagator;
+import io.opentelemetry.context.propagation.ContextPropagators;
+import io.opentelemetry.sdk.OpenTelemetrySdk;
+import jakarta.annotation.PostConstruct;
 import org.apache.camel.component.cxf.common.DataFormat;
 import org.apache.camel.component.cxf.jaxws.CxfEndpoint;
 import org.apache.camel.component.cxf.spring.jaxrs.SpringJAXRSClientFactoryBean;
@@ -19,6 +24,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
 class CxfBeans {
+
+    @PostConstruct
+    void w3c() {
+        OpenTelemetrySdk openTelemetry = OpenTelemetrySdk.builder()
+                .setPropagators(ContextPropagators.create(W3CTraceContextPropagator.getInstance())).build();
+        GlobalOpenTelemetry.set(openTelemetry);
+    }
 
     @Bean
     @ConditionalOnProperty(prefix = "reproducer", name = "enable-cxf-otel-features", havingValue = "true")
