@@ -65,7 +65,7 @@ class CxfBeans {
         endpoint.setDataFormat(DataFormat.PAYLOAD);
         endpoint.setServiceClass(TempConvertSoap.class);
         endpoint.setSynchronous(cxfSynchronous);
-        openTelemetryFeature.ifAvailable(f -> endpoint.getFeatures().add(f));
+//        openTelemetryFeature.ifAvailable(f -> endpoint.getFeatures().add(f));
 
         return endpoint;
     }
@@ -84,7 +84,7 @@ class CxfBeans {
         endpoint.setDataFormat(DataFormat.PAYLOAD);
         endpoint.setServiceClass(HelloWorld.class);
         endpoint.setSynchronous(cxfSynchronous);
-        openTelemetryClientFeature.ifAvailable(f -> endpoint.getFeatures().add(f));
+//        openTelemetryClientFeature.ifAvailable(f -> endpoint.getFeatures().add(f));
 
         return endpoint;
     }
@@ -103,7 +103,7 @@ class CxfBeans {
         endpoint.setDataFormat(DataFormat.PAYLOAD);
         endpoint.setServiceClass(Pizza.class);
         endpoint.setSynchronous(cxfSynchronous);
-        openTelemetryClientFeature.ifAvailable(f -> endpoint.getFeatures().add(f));
+//        openTelemetryClientFeature.ifAvailable(f -> endpoint.getFeatures().add(f));
 
         return endpoint;
     }
@@ -120,7 +120,7 @@ class CxfBeans {
         endpoint.setLoggingSizeLimit(5_000);
         endpoint.setSkipFaultLogging(false);
         endpoint.setServiceClass(SayHiRestService.class);
-        openTelemetryProvider.ifAvailable(endpoint::setProvider);
+//        openTelemetryProvider.ifAvailable(endpoint::setProvider);
 
         return endpoint;
     }
