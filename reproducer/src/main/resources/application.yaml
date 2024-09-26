@@ -5,6 +5,8 @@ spring:
     banner-mode: off
   jmx:
     enabled: true
+tracing:
+  url: "http://localhost:4317"
 
 camel:
   component:
@@ -27,6 +29,9 @@ camel:
     tracing-logging-format: "%-4.4s [%-50.50s] [%-50.50s]"
 
 management:
+  tracing:
+    sampling:
+      probability: 1.0
   endpoints:
     web:
       exposure:
